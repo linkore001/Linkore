@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Studio | Linkore Creative Blueprint Engine</title>
+    <title>Custom Studio | Linkore Bespoke Pipeline</title>
     <style>
         /* Base Reset & Variables */
         * {
@@ -20,6 +20,7 @@
             --text-main: #ffffff;
             --text-muted: #8b949e;
             --border-color: #21262d;
+            --pure-black: #000000;
         }
 
         body {
@@ -30,7 +31,7 @@
             padding: 0 4%;
         }
 
-        /* --- Header & Navigation --- */
+        /* --- Header & Navigation (Unified Layout) --- */
         header {
             display: grid;
             grid-template-columns: auto 1fr auto;
@@ -67,7 +68,6 @@
             text-shadow: 0 0 15px var(--accent-glow);
         }
 
-        /* Centered Header Search Component */
         .search-container {
             justify-self: center;
             width: 100%;
@@ -107,11 +107,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: color 0.3s;
-        }
-
-        .search-submit-btn:hover {
-            color: var(--accent-glow);
         }
 
         nav {
@@ -126,12 +121,11 @@
             font-weight: 500;
             color: var(--text-muted);
             text-decoration: none;
-            transition: color 0.3s ease, transform 0.2s ease;
+            transition: color 0.3s ease;
         }
 
         nav a:hover {
             color: var(--accent-glow);
-            transform: translateY(-2px);
         }
 
         nav .btn-contact {
@@ -150,99 +144,261 @@
             box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
         }
 
-        /* --- Main Custom Studio Container --- */
+        /* --- Custom Studio Main Panel --- */
         main {
-            max-width: 1100px;
+            max-width: 800px;
             margin: 4rem auto;
         }
 
-        /* Custom Title Design Block */
-        .studio-title-wrap {
+        /* Top Center Title Module with Light Background Track for Text-Contrast */
+        .studio-header {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.9) 70%, transparent 100%);
+            border-radius: 24px 24px 0 0;
+            margin-bottom: 0;
+        }
+
+        .studio-header h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        /* Text Customization Overrides */
+        .studio-header h1 .word-black {
+            color: var(--pure-black);
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+        }
+
+        .studio-header h1 .word-green {
+            color: var(--accent-glow);
+            text-shadow: 0px 2px 10px rgba(0, 255, 204, 0.6), 0 0 2px var(--pure-black);
+        }
+
+        /* Premium Conveying Intent Intro Box */
+        .intro-container {
+            background: linear-gradient(180deg, rgba(22,24,32,0.95) 0%, var(--surface-color) 100%);
+            border-left: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 3rem 2.5rem;
+            border-radius: 0 0 24px 24px;
             text-align: center;
             margin-bottom: 4rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
-        .studio-title-wrap h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-            letter-spacing: -1px;
-            margin-bottom: 1rem;
+        .intro-container p {
+            color: #e4e6eb;
+            font-size: 1.25rem;
+            line-height: 1.8;
+            font-weight: 400;
         }
 
-        /* Custom in plain high contrast white, Studio in signature brand green */
-        .studio-title-wrap h1 .text-white { color: var(--text-main); }
-        .studio-title-wrap h1 .text-green { color: var(--accent-glow); }
+        .intro-container p strong {
+            color: var(--accent-glow);
+            font-weight: 600;
+        }
 
-        .studio-title-wrap p {
+        /* --- Interactive Request Studio Form --- */
+        .form-panel {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .form-panel h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent-glow);
+            padding-left: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 600;
             color: var(--text-muted);
-            font-size: 1.15rem;
-            max-width: 600px;
-            margin: 0 auto;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
-        /* --- Interactive Service Grid Layout --- */
-        .studio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            margin-bottom: 5rem;
+        .form-control {
+            width: 100%;
+            background: #1f222e;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.85rem 1.1rem;
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
-        .studio-card {
+        .form-control:focus {
+            border-color: var(--accent-glow);
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+        }
+
+        select.form-control {
+            cursor: pointer;
+            appearance: none;
+        }
+
+        textarea.form-control {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        /* Custom File Upload Button Area */
+        .file-upload-wrapper {
+            position: relative;
+            background: #1f222e;
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .file-upload-wrapper:hover {
+            border-color: var(--accent-glow);
+        }
+
+        .file-upload-wrapper input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .upload-caption {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .upload-caption span {
+            color: var(--accent-glow);
+            font-weight: 600;
+        }
+
+        .submit-studio-btn {
+            width: 100%;
+            background: var(--accent-glow);
+            color: var(--bg-color);
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 1rem;
+        }
+
+        .submit-studio-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 255, 204, 0.3);
+        }
+
+        /* --- Modern Notification Pop-up System --- */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 6, 8, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popup-card {
             background: var(--surface-color);
             border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 2.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: border-color 0.3s, transform 0.3s;
+            text-align: center;
+            max-width: 440px;
+            width: 90%;
+            transform: translateY(30px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
         }
 
-        .studio-card:hover {
-            border-color: var(--accent-glow);
-            transform: translateY(-4px);
+        .popup-overlay.active .popup-card {
+            transform: translateY(0);
         }
 
-        .card-meta {
-            font-size: 0.75rem;
+        .popup-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 255, 204, 0.1);
             color: var(--accent-glow);
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 1.5rem auto;
         }
 
-        .studio-card h2 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
+        .popup-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
         }
 
-        .studio-card p {
+        .popup-card p {
             color: var(--text-muted);
             font-size: 0.95rem;
-            margin-bottom: 2rem;
-            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
         }
 
-        .studio-action-btn {
-            background: transparent;
-            border: 1px solid var(--text-main);
+        .popup-close-btn {
+            background: #1f222e;
             color: var(--text-main);
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 2rem;
+            border-radius: 6px;
             font-weight: 600;
-            text-align: center;
-            transition: all 0.3s;
+            cursor: pointer;
+            transition: background 0.2s;
         }
 
-        .studio-card:hover .studio-action-btn {
-            background: var(--text-main);
-            color: var(--bg-color);
+        .popup-close-btn:hover {
+            background: var(--border-color);
         }
 
-        /* --- Global Footer Layout --- */
+        /* --- Footer --- */
         footer {
             text-align: center;
             padding: 3rem 0;
@@ -252,7 +408,7 @@
             margin-top: 6rem;
         }
 
-        /* Responsive Design Adaptation */
+        /* Responsive Layout Overrides */
         @media (max-width: 768px) {
             header {
                 grid-template-columns: 1fr;
@@ -267,20 +423,24 @@
                 flex-wrap: wrap;
                 justify-content: center;
             }
-            .studio-title-wrap h1 {
+            .studio-header h1 {
                 font-size: 2.5rem;
+            }
+            .form-panel {
+                padding: 1.75rem;
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- Global Layout Header -->
     <header>
         <div class="brand-logo"><a href="index.html">LINK<span>ORE</span></a></div>
         
         <div class="search-container">
             <form action="#" method="GET" class="search-form">
-                <input type="text" name="s" placeholder="Search blog posts..." class="search-input" aria-label="Search blog posts">
+                <input type="text" name="s" placeholder="Search blog posts..." class="search-input">
                 <button type="submit" class="search-submit-btn" aria-label="Submit search">
                     <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -297,48 +457,91 @@
     </header>
 
     <main>
-        
-        <div class="studio-title-wrap">
-            <h1><span class="text-white">Custom </span><span class="text-green">Studio</span></h1>
-            <p>Deploy high-end creative templates, vector structures, and dynamic web asset configurations built completely to specification.</p>
+        <!-- Top Centered Header Section -->
+        <div class="studio-header">
+            <h1><span class="word-black">Custom</span> <span class="word-green">Studio</span></h1>
         </div>
 
-        <section class="studio-grid">
-            
-            <div class="studio-card">
-                <div>
-                    <div class="card-meta">Motion Architecture</div>
-                    <h2>Cinematic Math Templates</h2>
-                    <p>High-fidelity, smooth mathematical structures and explanatory vector scripts compiled to run efficiently inside presentation and short-form engine timelines.</p>
+        <!-- Premium Context Conveying Block -->
+        <div class="intro-container">
+            <p>Welcome to the ultimate customization hub. Here, your imagination defines our pipeline. Whether you are looking to secure rare specialized <strong>pets</strong>, order customized high-grade <strong>t-shirt designs</strong>, procure premium dietary <strong>pet food matrices</strong>, or launch bespoke product lines tailored completely to your vision—we build it to specifications. Fill out the architecture below to deploy your custom request instantly.</p>
+        </div>
+
+        <!-- Order Capture Form Infrastructure -->
+        <div class="form-panel">
+            <h2>Configure Your Pipeline</h2>
+            <form id="studioOrderForm" onsubmit="handleStudioSubmit(event)">
+                
+                <div class="form-group">
+                    <label for="userName">Full Name</label>
+                    <input type="text" id="userName" class="form-control" placeholder="Enter your name" required>
                 </div>
-                <a href="contact.html" class="studio-action-btn">Initialize Request</a>
-            </div>
 
-            <div class="studio-card">
-                <div>
-                    <div class="card-meta">Web Configuration</div>
-                    <h2>Custom Landing Assets</h2>
-                    <p>Clean, high-performance web structure frameworks featuring rich responsive layouts and fine neon branding elements optimized cleanly for rapid server-side indexing.</p>
+                <div class="form-group">
+                    <label for="productCategory">What do you want to order?</label>
+                    <select id="productCategory" class="form-control" required>
+                        <option value="" disabled selected>Select a core category...</option>
+                        <option value="T-Shirt">Customized T-Shirt Print</option>
+                        <option value="Pets">Specialized Pets / Acquisition</option>
+                        <option value="Pet Food">Premium Pet Food Formulation</option>
+                        <option value="Other">Bespoke Structural Request (Other)</option>
+                    </select>
                 </div>
-                <a href="contact.html" class="studio-action-btn">Initialize Request</a>
-            </div>
 
-            <div class="studio-card">
-                <div>
-                    <div class="card-meta">Graphics Pipeline</div>
-                    <h2>Premium Brand Vectors</h2>
-                    <p>Tailored minimalist identity nodes, digital assets, and high-contrast graphical iconography built specifically to separate your project platform from the crowd.</p>
+                <div class="form-group">
+                    <label for="productDetails">About the Product (Specifications)</label>
+                    <textarea id="productDetails" class="form-control" placeholder="Describe sizes, colors, specific print ideas, pet breeds, or configuration details..." required></textarea>
                 </div>
-                <a href="contact.html" class="studio-action-btn">Initialize Request</a>
-            </div>
 
-        </section>
+                <div class="form-group">
+                    <label>Photo Upload (For T-Shirt Prints or Reference Assets)</label>
+                    <div class="file-upload-wrapper">
+                        <span class="upload-caption">Drag & drop or <span>browse files</span> to attach images</span>
+                        <input type="file" id="productImage" accept="image/*">
+                    </div>
+                </div>
 
+                <div class="form-group">
+                    <label for="whatsappNumber">WhatsApp Contact Number</label>
+                    <input type="tel" id="whatsappNumber" class="form-control" placeholder="e.g., +91 XXXXX XXXXX" required>
+                </div>
+
+                <button type="submit" class="submit-studio-btn">Deploy Order Request</button>
+            </form>
+        </div>
     </main>
+
+    <!-- Modern Animated Modal Popup Module -->
+    <div class="popup-overlay" id="successPopup">
+        <div class="popup-card">
+            <div class="popup-icon">✓</div>
+            <h3>Request Synchronized</h3>
+            <p>Our team will respond on your WhatsApp number soon!</p>
+            <button class="popup-close-btn" onclick="closePopup()">Acknowledge</button>
+        </div>
+    </div>
 
     <footer>
         <p>&copy; 2026 LINKORE. All rights reserved. Powered by secure static architecture.</p>
     </footer>
 
+    <!-- Form Interactivity Logic Scripts -->
+    <script>
+        function handleStudioSubmit(event) {
+            event.preventDefault(); 
+            
+            // Activate the premium notification pop-up
+            const popup = document.getElementById('successPopup');
+            popup.classList.add('active');
+            
+            // Reset form fields cleanly
+            document.getElementById('studioOrderForm').reset();
+        }
+
+        function closePopup() {
+            const popup = document.getElementById('successPopup');
+            popup.classList.remove('active');
+        }
+    </script>
 </body>
 </html>
