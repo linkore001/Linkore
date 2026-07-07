@@ -1,0 +1,2 @@
+# Linkore
+The blog page
