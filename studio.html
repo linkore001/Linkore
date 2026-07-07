@@ -30,7 +30,7 @@
             padding: 0 4%;
         }
 
-        /* --- Header & Navigation (Identical Layout to Home) --- */
+        /* --- Header & Navigation --- */
         header {
             display: grid;
             grid-template-columns: auto 1fr auto;
@@ -105,4 +105,240 @@
             cursor: pointer;
             color: var(--text-muted);
             display: flex;
-            align-
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s;
+        }
+
+        .search-submit-btn:hover {
+            color: var(--accent-glow);
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            justify-self: end;
+        }
+
+        nav a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        nav .btn-contact {
+            background: transparent;
+            border: 1px solid var(--accent-glow);
+            color: var(--accent-glow);
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        nav .btn-contact:hover {
+            background: var(--accent-glow);
+            color: var(--bg-color);
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+        }
+
+        /* --- Main Custom Studio Container --- */
+        main {
+            max-width: 1100px;
+            margin: 4rem auto;
+        }
+
+        /* Custom Title Design Block */
+        .studio-title-wrap {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .studio-title-wrap h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+
+        /* Custom in plain high contrast white, Studio in signature brand green */
+        .studio-title-wrap h1 .text-white { color: var(--text-main); }
+        .studio-title-wrap h1 .text-green { color: var(--accent-glow); }
+
+        .studio-title-wrap p {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- Interactive Service Grid Layout --- */
+        .studio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .studio-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .studio-card:hover {
+            border-color: var(--accent-glow);
+            transform: translateY(-4px);
+        }
+
+        .card-meta {
+            font-size: 0.75rem;
+            color: var(--accent-glow);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .studio-card h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .studio-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .studio-action-btn {
+            background: transparent;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .studio-card:hover .studio-action-btn {
+            background: var(--text-main);
+            color: var(--bg-color);
+        }
+
+        /* --- Global Footer Layout --- */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 6rem;
+        }
+
+        /* Responsive Design Adaptation */
+        @media (max-width: 768px) {
+            header {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                gap: 1.2rem;
+            }
+            .brand-logo, .search-container, nav {
+                justify-self: center;
+            }
+            nav {
+                gap: 1.2rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .studio-title-wrap h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand-logo"><a href="index.html">LINK<span>ORE</span></a></div>
+        
+        <div class="search-container">
+            <form action="#" method="GET" class="search-form">
+                <input type="text" name="s" placeholder="Search blog posts..." class="search-input" aria-label="Search blog posts">
+                <button type="submit" class="search-submit-btn" aria-label="Submit search">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+        
+        <nav>
+            <a href="blog.html">Blog</a>
+            <a href="studio.html">Custom Studio</a>
+            <a href="contact.html" class="btn-contact">Contact Us</a>
+        </nav>
+    </header>
+
+    <main>
+        
+        <div class="studio-title-wrap">
+            <h1><span class="text-white">Custom </span><span class="text-green">Studio</span></h1>
+            <p>Deploy high-end creative templates, vector structures, and dynamic web asset configurations built completely to specification.</p>
+        </div>
+
+        <section class="studio-grid">
+            
+            <div class="studio-card">
+                <div>
+                    <div class="card-meta">Motion Architecture</div>
+                    <h2>Cinematic Math Templates</h2>
+                    <p>High-fidelity, smooth mathematical structures and explanatory vector scripts compiled to run efficiently inside presentation and short-form engine timelines.</p>
+                </div>
+                <a href="contact.html" class="studio-action-btn">Initialize Request</a>
+            </div>
+
+            <div class="studio-card">
+                <div>
+                    <div class="card-meta">Web Configuration</div>
+                    <h2>Custom Landing Assets</h2>
+                    <p>Clean, high-performance web structure frameworks featuring rich responsive layouts and fine neon branding elements optimized cleanly for rapid server-side indexing.</p>
+                </div>
+                <a href="contact.html" class="studio-action-btn">Initialize Request</a>
+            </div>
+
+            <div class="studio-card">
+                <div>
+                    <div class="card-meta">Graphics Pipeline</div>
+                    <h2>Premium Brand Vectors</h2>
+                    <p>Tailored minimalist identity nodes, digital assets, and high-contrast graphical iconography built specifically to separate your project platform from the crowd.</p>
+                </div>
+                <a href="contact.html" class="studio-action-btn">Initialize Request</a>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 LINKORE. All rights reserved. Powered by secure static architecture.</p>
+    </footer>
+
+</body>
+</html>
