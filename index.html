@@ -28,19 +28,21 @@
             padding: 0 4%;
         }
 
-        /* Header Navigation */
+        /* Header Navigation Grid */
         header {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
             align-items: center;
             padding: 1.5rem 0;
             border-bottom: 1px solid var(--border-color);
+            gap: 1rem;
         }
 
         .brand-logo {
             font-size: 1.5rem;
             font-weight: 800;
             letter-spacing: 3px;
+            justify-self: start;
         }
 
         .brand-logo a {
@@ -54,6 +56,57 @@
         }
 
         .brand-logo span { color: var(--accent-glow); }
+
+        /* Centered Search Bar Implementation */
+        .search-container {
+            justify-self: center;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .search-form {
+            display: flex;
+            position: relative;
+            align-items: center;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.5rem 2.5rem 0.5rem 1rem;
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-glow);
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.15);
+        }
+
+        .search-submit-btn {
+            position: absolute;
+            right: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s;
+        }
+
+        .search-submit-btn:hover {
+            color: var(--accent-glow);
+        }
+
+        nav {
+            justify-self: end;
+        }
 
         nav a {
             color: var(--text-muted);
@@ -161,13 +214,37 @@
             font-size: 0.85rem;
             margin-top: 5rem;
         }
+
+        /* Responsive scaling adjustment for mobile views */
+        @media (max-width: 680px) {
+            header {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                gap: 1.2rem;
+            }
+            .brand-logo, .search-container, nav {
+                justify-self: center;
+            }
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <!-- Updated branding with ORE wrapped for neon styling -->
         <div class="brand-logo"><a href="index.html">LINK<span>ORE</span></a></div>
+        
+        <!-- Center Header Search Block -->
+        <div class="search-container">
+            <form action="#" method="GET" class="search-form">
+                <input type="text" name="q" placeholder="Search blog posts..." class="search-input" aria-label="Search blog posts">
+                <button type="submit" class="search-submit-btn" aria-label="Submit search">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+
         <nav><a href="index.html">← Back to Home</a></nav>
     </header>
 
