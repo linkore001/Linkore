@@ -483,7 +483,7 @@
                 <h2>Submit Your Specifications</h2>
                 <form id="customStudioForm" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data" onsubmit="executeStudioOrder(event)">
                     
-                    <input type="hidden" name="access_key" value="5205ccbc-9fa0-4f73-a0e6-5d53400eecae">
+                    <input type="hidden" name="access_key" value="01c2492c-41f8-452d-9dce-6d1944b37d6b">
                     
                     <input type="hidden" name="subject" value="🔥 Linkore Custom Studio: New Request!">
                     
@@ -540,30 +540,48 @@
             event.preventDefault(); 
             
             const form = document.getElementById('customStudioForm');
+            const submitBtn = form.querySelector('.submit-studio-btn');
+            
+            // UI Visual Feedback: Disable submit interactions momentarily 
+            if(submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerText = "Sending Request...";
+            }
+
             const formData = new FormData(form);
 
-            // Send form information asynchronously to your inbox endpoint
+            // Fetch request optimized for Cross-Origin Resource Sharing rules on production servers
             fetch(form.action, {
                 method: form.method,
                 body: formData,
                 headers: {
                     'Accept': 'application/json'
-                }
+                },
+                mode: 'cors'
             })
-            .then(response => {
-                if (response.ok) {
-                    // Activate the brand matching pop-up overlay window smoothly upon success
+            .then(async (response) => {
+                const resData = await response.json();
+                
+                if (response.status === 200 || resData.success) {
+                    // Activate custom branding pop-up system smoothly upon success validation
                     const overlay = document.getElementById('orderSuccessPopup');
                     overlay.classList.add('active');
-                    
-                    // Flush the form layout cleanly upon confirmation
                     form.reset();
                 } else {
-                    alert("Submission error. Please verify your details or network connection.");
+                    // Pull specific backend exception details directly into layout UI alerts
+                    alert("Submission Error: " + (resData.message || "Please verify your details."));
                 }
             })
             .catch(error => {
-                alert("Network error occurred. Form message could not be sent.");
+                console.error("Form Architecture Submission Exception:", error);
+                alert("Network error occurred. Please check your internet connection.");
+            })
+            .finally(() => {
+                // Restore interactive controls
+                if(submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "Submit Custom Request";
+                }
             });
         }
 
