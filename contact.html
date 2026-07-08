@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Linkore</title>
+    <style>
+        /* Base Reset & Variables */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --bg-color: #0d0e12;
+            --surface-color: #161820;
+            --accent-glow: #00ffcc;
+            --text-main: #ffffff;
+            --text-muted: #8b949e;
+            --border-color: #21262d;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            padding: 1.5rem 4%;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background: rgba(13, 14, 18, 0.8);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            gap: 1.5rem;
+        }
+
+        .brand-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            color: var(--text-main);
+            transition: text-shadow 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .brand-logo span {
+            color: var(--accent-glow);
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            justify-self: end;
+        }
+
+        nav a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-glow);
+        }
+
+        nav .btn-contact {
+            background: var(--accent-glow);
+            color: var(--bg-color);
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+        }
+
+        /* --- Contact Split Layout --- */
+        .contact-wrapper {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 4%;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        /* --- Left Column: Convincing Copy & Details --- */
+        .contact-info h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .contact-info h1 span {
+            color: var(--accent-glow);
+            text-shadow: 0 0 15px rgba(0, 255, 204, 0.2);
+        }
+
+        .contact-pitch {
+            color: #e4e6eb;
+            font-size: 1.15rem;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .contact-pitch strong {
+            color: var(--accent-glow);
+            font-weight: 600;
+        }
+
+        .channels-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+        }
+
+        .channel-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .channel-card:hover {
+            border-color: var(--accent-glow);
+            transform: translateX(5px);
+        }
+
+        .channel-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 255, 204, 0.05);
+            border: 1px solid rgba(0, 255, 204, 0.2);
+            color: var(--accent-glow);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .channel-details p {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .channel-details a, .channel-details span {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            transition: color 0.2s;
+        }
+
+        .channel-details a:hover {
+            color: var(--accent-glow);
+        }
+
+        /* --- Right Column: Premium Form --- */
+        .contact-form-panel {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        .contact-form-panel h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent-glow);
+            padding-left: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            width: 100%;
+            background: #1f222e;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.85rem 1.1rem;
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-glow);
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.15);
+        }
+
+        textarea.form-control {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--text-main);
+            color: var(--bg-color);
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--accent-glow);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 255, 204, 0.3);
+        }
+
+        /* --- Popup System --- */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 6, 8, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popup-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            transform: translateY(30px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .popup-overlay.active .popup-card {
+            transform: translateY(0);
+        }
+
+        .popup-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 255, 204, 0.1);
+            color: var(--accent-glow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 1.25rem auto;
+        }
+
+        .popup-close-btn {
+            background: #1f222e;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 2.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 3rem 4%;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 6rem;
+        }
+
+        @media (max-width: 968px) {
+            .contact-wrapper { grid-template-columns: 1fr; gap: 3rem; }
+            .contact-info h1 { font-size: 2.8rem; }
+        }
+
+        @media (max-width: 768px) {
+            header { grid-template-columns: 1fr; justify-items: center; gap: 1.2rem; }
+            nav { gap: 1.2rem; flex-wrap: wrap; justify-content: center; }
+            .contact-form-panel { padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand-logo"><a href="index.html">LINK<span>ORE</span></a></div>
+        <nav>
+            <a href="blog.html">Blog</a>
+            <a href="studio.html">Custom Studio</a>
+            <a href="contact.html" class="btn-contact">Contact Us</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="contact-wrapper">
+            
+            <!-- Left Info Panel with Premium Copy -->
+            <div class="contact-info">
+                <h1>Let's build something <span>extraordinary</span>.</h1>
+                <p class="contact-pitch">
+                    Have a vision that demands premium execution? Whether you are navigating complex tech frameworks, launching a curated digital brand, or sourcing bespoke custom infrastructure through our Studio, we are built to bridge the gap. <strong>Your elite standards deserve a matching pipeline.</strong> Reach out across our encrypted communication channels below—let's bring your blueprints to life.
+                </p>
+                
+                <div class="channels-list">
+                    <!-- Email Card -->
+                    <div class="channel-card">
+                        <div class="channel-icon">✉</div>
+                        <div class="channel-details">
+                            <p>Direct Pipeline</p>
+                            <a href="mailto:linkore001@gmail.com">linkore001@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <!-- Phone Card -->
+                    <div class="channel-card">
+                        <div class="channel-icon">📞</div>
+                        <div class="channel-details">
+                            <p>Call / WhatsApp Support</p>
+                            <a href="tel:+918547337475">+91 85473 37475</a>
+                        </div>
+                    </div>
+
+                    <!-- Instagram Card -->
+                    <div class="channel-card">
+                        <div class="channel-icon">📸</div>
+                        <div class="channel-details">
+                            <p>Instagram Network</p>
+                            <a href="https://instagram.com/linkore_enterprises.in" target="_blank">@linkore_enterprises.in</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Interactive Form Panel -->
+            <div class="contact-form-panel">
+                <h2>Transmission Hub</h2>
+                <form id="linkoreContactForm" action="https://api.web3forms.com/submit" method="POST" onsubmit="handleFormSubmission(event)">
+                    
+                    <!-- Web3Forms Access Key -->
+                    <input type="hidden" name="access_key" value="01c2492c-41f8-452d-9dce-6d1944b37d6b">
+                    <input type="hidden" name="subject" value="✉️ Linkore Hub: New Message Secured!">
+
+                    <div class="form-group">
+                        <label for="userName">Name</label>
+                        <input type="text" id="userName" name="Name" class="form-control" placeholder="Identify yourself" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userEmail">Email Address</label>
+                        <input type="email" id="userEmail" name="Email" class="form-control" placeholder="Where should we respond?" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="messageBrief">Your Message</label>
+                        <textarea id="messageBrief" name="Message Detail" class="form-control" placeholder="Outline your inquiry, idea, or blueprint in detail..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Success Popup Modal -->
+    <div class="popup-overlay" id="contactSuccessPopup">
+        <div class="popup-card">
+            <div class="popup-icon">✓</div>
+            <h3>Message Encrypted & Sent!</h3>
+            <p>Your transmission was securely intercepted by the Linkore network. Expect a strategic response directly to your inbox or communication channel shortly.</p>
+            <button class="popup-close-btn" onclick="dismissContactPopup()">Close</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 LINKORE. All rights reserved. Powered by secure static architecture.</p>
+    </footer>
+
+    <script>
+        function handleFormSubmission(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('linkoreContactForm');
+            const submitBtn = form.querySelector('.submit-btn');
+            
+            if(submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerText = "Transmitting...";
+            }
+
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: { 'Accept': 'application/json' },
+                mode: 'cors'
+            })
+            .then(async (response) => {
+                const data = await response.json();
+                if (response.status === 200 || data.success) {
+                    document.getElementById('contactSuccessPopup').classList.add('active');
+                    form.reset();
+                } else {
+                    alert("Transmission failed: " + (data.message || "Please re-verify input layers."));
+                }
+            })
+            .catch(err => {
+                console.error("Network Architecture Exception:", err);
+                alert("Connection latency detected. Please try again.");
+            })
+            .finally(() => {
+                if(submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "Send Message";
+                }
+            });
+        }
+
+        function dismissContactPopup() {
+            document.getElementById('contactSuccessPopup').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
