@@ -28,15 +28,20 @@
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
-            padding: 0 4%;
         }
 
-        /* --- Header & Navigation (Unified Layout) --- */
+        /* Utility Links */
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- Header & Navigation (Identical to Homepage) --- */
         header {
             display: grid;
             grid-template-columns: auto 1fr auto;
             align-items: center;
-            padding: 1.5rem 0;
+            padding: 1.5rem 4%;
             border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
@@ -53,11 +58,6 @@
             color: var(--text-main);
             transition: text-shadow 0.3s ease;
             white-space: nowrap;
-        }
-
-        .brand-logo a {
-            color: var(--text-main);
-            text-decoration: none;
         }
 
         .brand-logo span {
@@ -107,6 +107,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: color 0.3s;
+        }
+
+        .search-submit-btn:hover {
+            color: var(--accent-glow);
         }
 
         nav {
@@ -120,12 +125,12 @@
             font-size: 0.95rem;
             font-weight: 500;
             color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, transform 0.2s ease;
         }
 
         nav a:hover {
             color: var(--accent-glow);
+            transform: translateY(-2px);
         }
 
         nav .btn-contact {
@@ -144,81 +149,90 @@
             box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
         }
 
-        /* --- Custom Studio Main Panel --- */
-        main {
-            max-width: 800px;
-            margin: 4rem auto;
-        }
-
-        /* Top Center Title Module with Light Background Track for Text-Contrast */
-        .studio-header {
+        /* --- Hero Company Banner Style --- */
+        .hero-banner {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            min-height: 55vh;
             padding: 3rem 2rem;
-            background: linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.9) 70%, transparent 100%);
-            border-radius: 24px 24px 0 0;
-            margin-bottom: 0;
+            margin: 2rem 4%;
+            background: radial-gradient(circle at center, #1f2438 0%, var(--surface-color) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .studio-header h1 {
-            font-size: 4rem;
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,255,204,0.05) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* Top Center Custom Studio: Black and Green precisely */
+        .hero-banner h1 {
+            font-size: 3.5rem;
             font-weight: 900;
-            letter-spacing: -2px;
-            line-height: 1.1;
+            letter-spacing: -1px;
             margin-bottom: 1.5rem;
             text-transform: uppercase;
         }
 
-        /* Text Customization Overrides */
-        .studio-header h1 .word-black {
+        .hero-banner h1 .word-black {
             color: var(--pure-black);
-            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+            /* Subtle text-shadow so black text reads cleanly over the dark radial background gradient */
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2), 0 0 1px rgba(255, 255, 255, 0.5);
         }
 
-        .studio-header h1 .word-green {
+        .hero-banner h1 .word-green {
             color: var(--accent-glow);
-            text-shadow: 0px 2px 10px rgba(0, 255, 204, 0.6), 0 0 2px var(--pure-black);
+            text-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
         }
 
-        /* Premium Conveying Intent Intro Box */
-        .intro-container {
-            background: linear-gradient(180deg, rgba(22,24,32,0.95) 0%, var(--surface-color) 100%);
-            border-left: 1px solid var(--border-color);
-            border-right: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            padding: 3rem 2.5rem;
-            border-radius: 0 0 24px 24px;
-            text-align: center;
-            margin-bottom: 4rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .intro-container p {
+        /* Friendly, Trustworthy, Premium, and Catchy Paragraph */
+        .hero-banner p {
+            font-size: 1.2rem;
             color: #e4e6eb;
-            font-size: 1.25rem;
+            max-width: 720px;
             line-height: 1.8;
             font-weight: 400;
         }
 
-        .intro-container p strong {
+        .hero-banner p strong {
             color: var(--accent-glow);
             font-weight: 600;
         }
 
-        /* --- Interactive Request Studio Form --- */
+        /* --- Form Container System --- */
+        .form-section {
+            max-width: 700px;
+            margin: 4rem auto;
+            padding: 0 4%;
+        }
+
         .form-panel {
             background: var(--surface-color);
             border: 1px solid var(--border-color);
-            border-radius: 20px;
+            border-radius: 16px;
             padding: 3rem;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
 
         .form-panel h2 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 700;
             margin-bottom: 2rem;
             border-left: 4px solid var(--accent-glow);
             padding-left: 12px;
+            letter-spacing: 0.5px;
         }
 
         .form-group {
@@ -229,7 +243,7 @@
         }
 
         .form-group label {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: var(--text-muted);
             letter-spacing: 0.5px;
@@ -250,26 +264,21 @@
 
         .form-control:focus {
             border-color: var(--accent-glow);
-            box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
-        }
-
-        select.form-control {
-            cursor: pointer;
-            appearance: none;
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.15);
         }
 
         textarea.form-control {
-            min-height: 130px;
+            min-height: 120px;
             resize: vertical;
         }
 
-        /* Custom File Upload Button Area */
+        /* File Upload Dropzone */
         .file-upload-wrapper {
             position: relative;
             background: #1f222e;
             border: 2px dashed var(--border-color);
             border-radius: 8px;
-            padding: 1.5rem;
+            padding: 1.75rem;
             text-align: center;
             cursor: pointer;
             transition: border-color 0.3s;
@@ -301,7 +310,7 @@
 
         .submit-studio-btn {
             width: 100%;
-            background: var(--accent-glow);
+            background: var(--text-main);
             color: var(--bg-color);
             border: none;
             padding: 1rem;
@@ -309,16 +318,17 @@
             font-size: 1.05rem;
             font-weight: 700;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
             margin-top: 1rem;
         }
 
         .submit-studio-btn:hover {
+            background-color: var(--accent-glow);
             transform: translateY(-2px);
             box-shadow: 0 5px 20px rgba(0, 255, 204, 0.3);
         }
 
-        /* --- Modern Notification Pop-up System --- */
+        /* --- Custom Notification Popup Module --- */
         .popup-overlay {
             position: fixed;
             top: 0;
@@ -347,7 +357,7 @@
             border-radius: 16px;
             padding: 2.5rem;
             text-align: center;
-            max-width: 440px;
+            max-width: 450px;
             width: 90%;
             transform: translateY(30px);
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -368,52 +378,55 @@
             align-items: center;
             justify-content: center;
             font-size: 1.8rem;
-            margin: 0 auto 1.5rem auto;
+            margin: 0 auto 1.25rem auto;
         }
 
         .popup-card h3 {
             font-size: 1.4rem;
             margin-bottom: 0.75rem;
+            color: var(--text-main);
         }
 
         .popup-card p {
             color: var(--text-muted);
             font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
+            margin-bottom: 1.75rem;
+            line-height: 1.6;
         }
 
         .popup-close-btn {
             background: #1f222e;
             color: var(--text-main);
             border: 1px solid var(--border-color);
-            padding: 0.6rem 2rem;
+            padding: 0.6rem 2.5rem;
             border-radius: 6px;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: background 0.2s, border-color 0.2s;
         }
 
         .popup-close-btn:hover {
             background: var(--border-color);
+            border-color: var(--accent-glow);
         }
 
         /* --- Footer --- */
         footer {
             text-align: center;
-            padding: 3rem 0;
+            padding: 3rem 4%;
             border-top: 1px solid var(--border-color);
             color: var(--text-muted);
             font-size: 0.85rem;
             margin-top: 6rem;
         }
 
-        /* Responsive Layout Overrides */
+        /* Responsive Design Rules */
         @media (max-width: 768px) {
             header {
                 grid-template-columns: 1fr;
                 justify-items: center;
                 gap: 1.2rem;
+                padding: 1.5rem 4%;
             }
             .brand-logo, .search-container, nav {
                 justify-self: center;
@@ -423,24 +436,27 @@
                 flex-wrap: wrap;
                 justify-content: center;
             }
-            .studio-header h1 {
+            .hero-banner h1 {
                 font-size: 2.5rem;
             }
+            .hero-banner p {
+                font-size: 1.05rem;
+            }
             .form-panel {
-                padding: 1.75rem;
+                padding: 2rem 1.5rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Global Layout Header -->
+    <!-- Unified Navigation Header -->
     <header>
         <div class="brand-logo"><a href="index.html">LINK<span>ORE</span></a></div>
         
         <div class="search-container">
             <form action="#" method="GET" class="search-form">
-                <input type="text" name="s" placeholder="Search blog posts..." class="search-input">
+                <input type="text" name="s" placeholder="Search blog posts..." class="search-input" aria-label="Search blog posts">
                 <button type="submit" class="search-submit-btn" aria-label="Submit search">
                     <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -456,91 +472,87 @@
         </nav>
     </header>
 
+    <!-- Interactive Section Architecture -->
     <main>
-        <!-- Top Centered Header Section -->
-        <div class="studio-header">
+        
+        <!-- Hero Company Banner Configuration -->
+        <section class="hero-banner">
             <h1><span class="word-black">Custom</span> <span class="word-green">Studio</span></h1>
-        </div>
+            <p>Can't find exactly what you're looking for on our main catalog? Don't worry—we've got you covered. Welcome to our private customization launchpad, where you can order absolutely anything you need tailored to perfection. From unique custom-printed t-shirts to specialized lifestyle or pet provisions, if it's not available on the website, we will source or manufacture it for you at an unbeatable, transparent low cost. Trust our pipeline to deliver premium quality directly to your doorstep.</p>
+        </section>
 
-        <!-- Premium Context Conveying Block -->
-        <div class="intro-container">
-            <p>Welcome to the ultimate customization hub. Here, your imagination defines our pipeline. Whether you are looking to secure rare specialized <strong>pets</strong>, order customized high-grade <strong>t-shirt designs</strong>, procure premium dietary <strong>pet food matrices</strong>, or launch bespoke product lines tailored completely to your vision—we build it to specifications. Fill out the architecture below to deploy your custom request instantly.</p>
-        </div>
-
-        <!-- Order Capture Form Infrastructure -->
-        <div class="form-panel">
-            <h2>Configure Your Pipeline</h2>
-            <form id="studioOrderForm" onsubmit="handleStudioSubmit(event)">
-                
-                <div class="form-group">
-                    <label for="userName">Full Name</label>
-                    <input type="text" id="userName" class="form-control" placeholder="Enter your name" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="productCategory">What do you want to order?</label>
-                    <select id="productCategory" class="form-control" required>
-                        <option value="" disabled selected>Select a core category...</option>
-                        <option value="T-Shirt">Customized T-Shirt Print</option>
-                        <option value="Pets">Specialized Pets / Acquisition</option>
-                        <option value="Pet Food">Premium Pet Food Formulation</option>
-                        <option value="Other">Bespoke Structural Request (Other)</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="productDetails">About the Product (Specifications)</label>
-                    <textarea id="productDetails" class="form-control" placeholder="Describe sizes, colors, specific print ideas, pet breeds, or configuration details..." required></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label>Photo Upload (For T-Shirt Prints or Reference Assets)</label>
-                    <div class="file-upload-wrapper">
-                        <span class="upload-caption">Drag & drop or <span>browse files</span> to attach images</span>
-                        <input type="file" id="productImage" accept="image/*">
+        <!-- User-Friendly Capture Form Structure -->
+        <section class="form-section">
+            <div class="form-panel">
+                <h2>Submit Your Specifications</h2>
+                <form id="customStudioForm" onsubmit="executeStudioOrder(event)">
+                    
+                    <div class="form-group">
+                        <label for="clientName">Name</label>
+                        <input type="text" id="clientName" class="form-control" placeholder="Your full name" required>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="whatsappNumber">WhatsApp Contact Number</label>
-                    <input type="tel" id="whatsappNumber" class="form-control" placeholder="e.g., +91 XXXXX XXXXX" required>
-                </div>
+                    <div class="form-group">
+                        <label for="whatsappContact">WhatsApp Contact Number</label>
+                        <input type="tel" id="whatsappContact" class="form-control" placeholder="e.g., +91 XXXXX XXXXX" required>
+                    </div>
 
-                <button type="submit" class="submit-studio-btn">Deploy Order Request</button>
-            </form>
-        </div>
+                    <div class="form-group">
+                        <label for="productRequired">What do you need?</label>
+                        <input type="text" id="productRequired" class="form-control" placeholder="e.g., Printed T-Shirt, Custom Pet Accessory, etc." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productDescription">About that Product</label>
+                        <textarea id="productDescription" class="form-control" placeholder="Please describe design ideas, sizes, colors, material specifications, or custom details..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Add Attachment (Photo or Video Reference)</label>
+                        <div class="file-upload-wrapper">
+                            <span class="upload-caption">Drag & drop or <span>browse files</span> to upload product references</span>
+                            <input type="file" id="productAttachment" accept="image/*,video/*">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-studio-btn">Submit Custom Request</button>
+                </form>
+            </div>
+        </section>
+
     </main>
 
-    <!-- Modern Animated Modal Popup Module -->
-    <div class="popup-overlay" id="successPopup">
+    <!-- Precise Verification Pop-up System -->
+    <div class="popup-overlay" id="orderSuccessPopup">
         <div class="popup-card">
             <div class="popup-icon">✓</div>
-            <h3>Request Synchronized</h3>
-            <p>Our team will respond on your WhatsApp number soon!</p>
-            <button class="popup-close-btn" onclick="closePopup()">Acknowledge</button>
+            <h3>Request Submitted</h3>
+            <p>Our team will respond soon with your request.</p>
+            <button class="popup-close-btn" onclick="dismissPopup()">Acknowledge</button>
         </div>
     </div>
 
+    <!-- Global Footer System -->
     <footer>
         <p>&copy; 2026 LINKORE. All rights reserved. Powered by secure static architecture.</p>
     </footer>
 
     <!-- Form Interactivity Logic Scripts -->
     <script>
-        function handleStudioSubmit(event) {
+        function executeStudioOrder(event) {
             event.preventDefault(); 
             
-            // Activate the premium notification pop-up
-            const popup = document.getElementById('successPopup');
-            popup.classList.add('active');
+            // Activate the brand matching pop-up overlay window
+            const overlay = document.getElementById('orderSuccessPopup');
+            overlay.classList.add('active');
             
-            // Reset form fields cleanly
-            document.getElementById('studioOrderForm').reset();
+            // Flush the form layout cleanly upon confirmation
+            document.getElementById('customStudioForm').reset();
         }
 
-        function closePopup() {
-            const popup = document.getElementById('successPopup');
-            popup.classList.remove('active');
+        function dismissPopup() {
+            const overlay = document.getElementById('orderSuccessPopup');
+            overlay.classList.remove('active');
         }
     </script>
 </body>
