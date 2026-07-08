@@ -430,7 +430,7 @@
             }
             .brand-logo, .search-container, nav {
                 justify-self: center;
-            }
+                }
             nav {
                 gap: 1.2rem;
                 flex-wrap: wrap;
@@ -450,7 +450,6 @@
 </head>
 <body>
 
-    <!-- Unified Navigation Header -->
     <header>
         <div class="brand-logo"><a href="index.html">LINK<span>ORE</span></a></div>
         
@@ -472,46 +471,47 @@
         </nav>
     </header>
 
-    <!-- Interactive Section Architecture -->
     <main>
         
-        <!-- Hero Company Banner Configuration -->
         <section class="hero-banner">
             <h1><span class="word-black">Custom</span> <span class="word-green">Studio</span></h1>
             <p>Can't find exactly what you're looking for on our main catalog? Don't worry—we've got you covered. Welcome to our private customization launchpad, where you can order absolutely anything you need tailored to perfection. From unique custom-printed t-shirts to specialized lifestyle or pet provisions, if it's not available on the website, we will source or manufacture it for you at an unbeatable, transparent low cost. Trust our pipeline to deliver premium quality directly to your doorstep.</p>
         </section>
 
-        <!-- User-Friendly Capture Form Structure -->
         <section class="form-section">
             <div class="form-panel">
                 <h2>Submit Your Specifications</h2>
-                <form id="customStudioForm" onsubmit="executeStudioOrder(event)">
+                <form id="customStudioForm" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data" onsubmit="executeStudioOrder(event)">
+                    
+                    <input type="hidden" name="access_key" value="5205ccbc-9fa0-4f73-a0e6-5d53400eecae">
+                    
+                    <input type="hidden" name="subject" value="🔥 Linkore Custom Studio: New Request!">
                     
                     <div class="form-group">
                         <label for="clientName">Name</label>
-                        <input type="text" id="clientName" class="form-control" placeholder="Your full name" required>
+                        <input type="text" id="clientName" name="Client Name" class="form-control" placeholder="Your full name" required>
                     </div>
 
                     <div class="form-group">
                         <label for="whatsappContact">WhatsApp Contact Number</label>
-                        <input type="tel" id="whatsappContact" class="form-control" placeholder="e.g., +91 XXXXX XXXXX" required>
+                        <input type="tel" id="whatsappContact" name="WhatsApp Contact" class="form-control" placeholder="e.g., +91 XXXXX XXXXX" required>
                     </div>
 
                     <div class="form-group">
                         <label for="productRequired">What do you need?</label>
-                        <input type="text" id="productRequired" class="form-control" placeholder="e.g., Printed T-Shirt, Custom Pet Accessory, etc." required>
+                        <input type="text" id="productRequired" name="Requested Item" class="form-control" placeholder="e.g., Printed T-Shirt, Custom Pet Accessory, etc." required>
                     </div>
 
                     <div class="form-group">
                         <label for="productDescription">About that Product</label>
-                        <textarea id="productDescription" class="form-control" placeholder="Please describe design ideas, sizes, colors, material specifications, or custom details..." required></textarea>
+                        <textarea id="productDescription" name="Detailed Specifications" class="form-control" placeholder="Please describe design ideas, sizes, colors, material specifications, or custom details..." required></textarea>
                     </div>
 
                     <div class="form-group">
                         <label>Add Attachment (Photo or Video Reference)</label>
                         <div class="file-upload-wrapper">
                             <span class="upload-caption">Drag & drop or <span>browse files</span> to upload product references</span>
-                            <input type="file" id="productAttachment" accept="image/*,video/*">
+                            <input type="file" id="productAttachment" name="Reference File Attachment" accept="image/*,video/*">
                         </div>
                     </div>
 
@@ -522,7 +522,6 @@
 
     </main>
 
-    <!-- Precise Verification Pop-up System -->
     <div class="popup-overlay" id="orderSuccessPopup">
         <div class="popup-card">
             <div class="popup-icon">✓</div>
@@ -532,22 +531,40 @@
         </div>
     </div>
 
-    <!-- Global Footer System -->
     <footer>
         <p>&copy; 2026 LINKORE. All rights reserved. Powered by secure static architecture.</p>
     </footer>
 
-    <!-- Form Interactivity Logic Scripts -->
     <script>
         function executeStudioOrder(event) {
             event.preventDefault(); 
             
-            // Activate the brand matching pop-up overlay window
-            const overlay = document.getElementById('orderSuccessPopup');
-            overlay.classList.add('active');
-            
-            // Flush the form layout cleanly upon confirmation
-            document.getElementById('customStudioForm').reset();
+            const form = document.getElementById('customStudioForm');
+            const formData = new FormData(form);
+
+            // Send form information asynchronously to your inbox endpoint
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Activate the brand matching pop-up overlay window smoothly upon success
+                    const overlay = document.getElementById('orderSuccessPopup');
+                    overlay.classList.add('active');
+                    
+                    // Flush the form layout cleanly upon confirmation
+                    form.reset();
+                } else {
+                    alert("Submission error. Please verify your details or network connection.");
+                }
+            })
+            .catch(error => {
+                alert("Network error occurred. Form message could not be sent.");
+            });
         }
 
         function dismissPopup() {
