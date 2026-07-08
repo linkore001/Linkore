@@ -34,7 +34,7 @@
             color: inherit;
         }
 
-        /* --- Header & Navigation (Identical Layout) --- */
+        /* --- Header & Navigation (Identical Layout with Search) --- */
         header {
             display: grid;
             grid-template-columns: auto 1fr auto;
@@ -59,6 +59,53 @@
         }
 
         .brand-logo span {
+            color: var(--accent-glow);
+        }
+
+        /* Centered Search Bar Integration */
+        .search-container {
+            justify-self: center;
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .search-form {
+            display: flex;
+            position: relative;
+            align-items: center;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.55rem 2.5rem 0.55rem 1.1rem;
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-glow);
+            box-shadow: 0 0 12px rgba(0, 255, 204, 0.15);
+        }
+
+        .search-submit-btn {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s;
+        }
+
+        .search-submit-btn:hover {
             color: var(--accent-glow);
         }
 
@@ -120,6 +167,19 @@
             font-size: 1.1rem;
             max-width: 600px;
             margin: 0 auto;
+        }
+
+        /* --- No Results Message Styling --- */
+        .no-results-msg {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            background: var(--surface-color);
+            border: 1px dashed var(--border-color);
+            border-radius: 16px;
+            display: none;
         }
 
         /* --- Blog Grid System --- */
@@ -254,6 +314,7 @@
 
         @media (max-width: 768px) {
             header { grid-template-columns: 1fr; justify-items: center; gap: 1.2rem; }
+            .search-container { justify-self: center; }
             nav { gap: 1.2rem; flex-wrap: wrap; justify-content: center; }
             .blog-header h1 { font-size: 2.5rem; }
             .blog-container { grid-template-columns: 1fr; }
@@ -264,6 +325,19 @@
 
     <header>
         <div class="brand-logo"><a href="index.html">LINK<span>ORE</span></a></div>
+        
+        <!-- Center Top Global Search Field -->
+        <div class="search-container">
+            <div class="search-form">
+                <input type="text" id="blogSearchInput" placeholder="Search blog posts..." class="search-input" aria-label="Search blog posts">
+                <button type="button" class="search-submit-btn" aria-label="Submit search">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
         <nav>
             <a href="blog.html" class="active">Blog</a>
             <a href="studio.html">Custom Studio</a>
@@ -277,7 +351,10 @@
             <p>Your portal to elite technical assessments, product updates, and raw digital blueprints.</p>
         </section>
 
-        <section class="blog-container">
+        <section class="blog-container" id="blogGrid">
+            <!-- Dynamic State Message when No Matches Found -->
+            <div class="no-results-msg" id="noResults">No matching architectural insights found. Try another term.</div>
+
             <!-- Sample Blog Block: iPhone 17 Concept -->
             <article class="blog-card" onclick="window.location.href='iphone17-review.html'">
                 <div class="blog-image-wrapper">
@@ -303,6 +380,39 @@
     <footer>
         <p>&copy; 2026 LINKORE. All rights reserved. Powered by secure static architecture.</p>
     </footer>
+
+    <!-- Real-time High-Precision Search Engine Script -->
+    <script>
+        document.getElementById('blogSearchInput').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            const cards = document.querySelectorAll('#blogGrid .blog-card');
+            const noResults = document.getElementById('noResults');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                // Extracts and compiles text targets for matching evaluation
+                const title = card.querySelector('.blog-title').textContent.toLowerCase();
+                const desc = card.querySelector('.blog-description').textContent.toLowerCase();
+                const tag = card.querySelector('.blog-tag').textContent.toLowerCase();
+                const meta = card.querySelector('.blog-meta').textContent.toLowerCase();
+
+                // Evaluates query against structural card properties
+                if (title.includes(query) || desc.includes(query) || tag.includes(query) || meta.includes(query)) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Toggles fallback screen if search misses all modules
+            if (visibleCount === 0 && query !== '') {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        });
+    </script>
 
 </body>
 </html>
