@@ -37,8 +37,8 @@
 
         /* --- Navigation Bar --- */
         header {
-            display: grid;
-            grid-template-columns: auto 1fr auto;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
             padding: 1.5rem 4%;
             border-bottom: 1px solid var(--border-color);
@@ -57,8 +57,8 @@
 
         .brand-logo span { color: var(--accent-glow); }
 
-        nav { display: flex; gap: 2rem; align-items: center; }
-        nav a { font-size: 0.95rem; color: var(--text-muted); transition: color 0.3s; }
+        nav { display: flex; gap: 2.5rem; align-items: center; }
+        nav a { font-size: 0.95rem; color: var(--text-muted); transition: color 0.3s; font-weight: 500; }
         nav a:hover { color: var(--accent-glow); }
 
         /* --- Article Layout --- */
@@ -276,7 +276,7 @@
     <main class="article-container">
         <div class="meta-category">Hardware Review</div>
         <h1>The Apple iPhone 17 Assessment: Is It Truly Worth Your Money?</h1>
-        
+         
         <div class="author-bar">
             <span>By Linkore Technical Team</span> &bull; 
             <span>July 2026</span> &bull;
