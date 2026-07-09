@@ -230,6 +230,7 @@
         }
 
         .blog-image-wrapper img {
+            display: block; /* Forces image to render as a perfect block container element */
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -254,6 +255,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             backdrop-filter: blur(4px);
+            z-index: 10;
         }
 
         .blog-content {
@@ -419,11 +421,10 @@
         <section class="blog-container" id="blogGrid">
             <div class="no-results-msg" id="noResultsElement">No matching articles found. Try another search phrase!</div>
 
-            <!-- Blog Card 1: iPhone -->
             <article class="blog-card" onclick="window.location.href='iphone17-review.html'">
                 <div class="blog-image-wrapper">
                     <span class="blog-tag">Exclusive Rumor</span>
-                    <img src="iphone17.jpg.png" alt="iPhone 17 Leak and Concept Mockup">
+                    <img src="iphone17.jpg" alt="iPhone 17 Leak and Concept Mockup">
                 </div>
                 <div class="blog-content">
                     <div class="blog-meta">July 2026 &bull; 4 min read</div>
@@ -438,7 +439,6 @@
                 </div>
             </article>
 
-            <!-- Blog Card 2: New Added Post -->
             <article class="blog-card" onclick="window.location.href='blog_2.html'">
                 <div class="blog-image-wrapper">
                     <span class="blog-tag">Tech Architecture</span>
@@ -463,8 +463,7 @@
         <div class="search-modal-content">
             <button class="modal-close-btn" onclick="closeSearchModal()">&times;</button>
             <h2 class="modal-header-title">Search Results for: <span id="modalQueryTerm">...</span></h2>
-            <div class="blog-container" id="modalGrid" style="margin-bottom:0; padding:0;">
-                </div>
+            <div class="blog-container" id="modalGrid" style="margin-bottom:0; padding:0;"></div>
             <div id="modalNoResults" style="text-align: center; color: var(--text-muted); display: none; padding: 2rem 0;">
                 No explicit results found matching this specification term.
             </div>
@@ -478,7 +477,7 @@
     <script>
         function executeBlogSearch() {
             const query = document.getElementById('blogSearchInput').value.toLowerCase().trim();
-            if (query === "") return; // Prevent empty search actions
+            if (query === "") return; 
 
             const cards = document.querySelectorAll('#blogGrid .blog-card');
             const modal = document.getElementById('searchModal');
@@ -486,30 +485,24 @@
             const modalNoResults = document.getElementById('modalNoResults');
             const modalQueryTerm = document.getElementById('modalQueryTerm');
             
-            // Set layout view parameters
             modalQueryTerm.textContent = `"${document.getElementById('blogSearchInput').value}"`;
             modalGrid.innerHTML = ''; 
             let matchingCount = 0;
 
             cards.forEach(card => {
-                // Read and pull all textual context fields natively
                 const title = card.querySelector('.blog-title').textContent.toLowerCase();
                 const description = card.querySelector('.blog-description').textContent.toLowerCase();
                 const tag = card.querySelector('.blog-tag').textContent.toLowerCase();
                 const meta = card.querySelector('.blog-meta').textContent.toLowerCase();
 
-                // Advanced conditional match scanning mapping rules
                 if (title.includes(query) || description.includes(query) || tag.includes(query) || meta.includes(query)) {
-                    // Clone matching structural layout instances directly into popup array grid
                     const clone = card.cloneNode(true);
-                    // Re-apply navigation onclick handlers cleanly onto clones
                     clone.setAttribute('onclick', card.getAttribute('onclick'));
                     modalGrid.appendChild(clone);
                     matchingCount++;
                 }
             });
 
-            // Adjust layout UI engine output visibility parameters
             if (matchingCount === 0) {
                 modalNoResults.style.display = 'block';
             } else {
@@ -517,15 +510,14 @@
             }
 
             modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Lock main page scrolling when active
+            document.body.style.overflow = 'hidden'; 
         }
 
         function closeSearchModal() {
             document.getElementById('searchModal').style.display = 'none';
-            document.body.style.overflow = 'auto'; // Unlock scrolling
+            document.body.style.overflow = 'auto'; 
         }
 
-        // Close search popup if clicked outside content card box bounds
         window.onclick = function(event) {
             const modal = document.getElementById('searchModal');
             if (event.target == modal) {
@@ -533,7 +525,6 @@
             }
         }
 
-        // Allow pressing "Enter" inside the field to open search popup cleanly
         document.getElementById('blogSearchInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 executeBlogSearch();
