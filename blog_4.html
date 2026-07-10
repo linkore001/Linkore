@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Blueprint Report: Architectural Analysis of the NYRWANA Metallic Table Lamp | Linkore</title>
+    <style>
+        /* Base Reset & Linkore Design Language Variables */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --bg-color: #0d0e12;
+            --surface-color: #111218;
+            --card-bg: #161820;
+            --accent-glow: #00ffcc;
+            --accent-muted: rgba(0, 255, 204, 0.15);
+            --text-main: #ffffff;
+            --text-muted: #8b949e;
+            --border-color: #21262d;
+            --alert-red: #ff4d4d;
+            --alert-red-muted: rgba(255, 77, 77, 0.15);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: 4rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- Header Navigation --- */
+        header {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            padding: 1.5rem 6%;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background: rgba(13, 14, 18, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+        }
+
+        .brand-logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            color: var(--text-main);
+        }
+
+        .brand-logo span {
+            color: var(--accent-glow);
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            justify-self: end;
+        }
+
+        nav a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-glow);
+        }
+
+        nav .btn-contact {
+            background: transparent;
+            border: 1px solid var(--accent-glow);
+            color: var(--accent-glow);
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        nav .btn-contact:hover {
+            background: var(--accent-glow);
+            color: var(--bg-color);
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+        }
+
+        /* --- Article Layout Container --- */
+        .article-wrapper {
+            max-width: 1100px;
+            margin: 3rem auto 0 auto;
+            padding: 0 4%;
+        }
+
+        /* --- Article Meta Header --- */
+        .article-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .article-header h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.8rem;
+        }
+
+        .article-meta-data {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .article-meta-data span strong {
+            color: var(--text-main);
+        }
+
+        /* --- Top Layout Grid (Showcase vs Purchase Blueprint Verdict) --- */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: start;
+        }
+
+        /* Left Side: Product Image Array Components */
+        .image-showcase-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .main-display-frame {
+            width: 100%;
+            height: 400px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-display-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .thumbnail-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+        }
+
+        .thumbnail-item {
+            height: 80px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.2s ease, opacity 0.2s;
+        }
+
+        .thumbnail-item:hover, .thumbnail-item.active {
+            border-color: var(--accent-glow);
+        }
+
+        .thumbnail-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Right Side: Trustworthy Lab Verdict Block */
+        .lab-verdict-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .verdict-header-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--accent-glow);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .verdict-product-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .verdict-product-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .price-evaluation-block {
+            margin: 1.5rem 0;
+        }
+
+        .price-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .price-flex {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            margin-top: 0.25rem;
+        }
+
+        .live-price-tag {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .live-price-link {
+            font-size: 0.9rem;
+            color: var(--accent-glow);
+            font-weight: 600;
+            margin-left: auto;
+            transition: opacity 0.2s;
+        }
+
+        .live-price-link:hover {
+            text-decoration: underline;
+        }
+
+        /* The Premium Trustworthy Checkout Action Component */
+        .secure-checkout-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            background: var(--accent-glow);
+            color: var(--bg-color);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 1rem;
+        }
+
+        .secure-checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 255, 204, 0.3);
+        }
+
+        .security-guarantee-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .security-guarantee-note svg {
+            color: var(--accent-glow);
+        }
+
+        /* --- Section Styling Core Configurations --- */
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            position: relative;
+            letter-spacing: -0.3px;
+        }
+
+        .section-paragraph {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            text-align: justify;
+        }
+
+        /* --- Pros & Cons Side-by-Side Matrix Layout --- */
+        .pro-con-matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .matrix-column {
+            border-radius: 12px;
+            padding: 1.8rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .matrix-column.advantages-layer {
+            background: linear-gradient(180deg, var(--accent-muted) 0%, rgba(17,18,24,0) 100%);
+            border-top: 2px solid var(--accent-glow);
+        }
+
+        .matrix-column.thresholds-layer {
+            background: linear-gradient(180deg, var(--alert-red-muted) 0%, rgba(17,18,24,0) 100%);
+            border-top: 2px solid var(--alert-red);
+        }
+
+        .matrix-header {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .matrix-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .matrix-list li {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+
+        .matrix-list .advantage-item { color: #e1e7ed; }
+        .matrix-list .advantage-item strong { color: var(--accent-glow); }
+        .matrix-list .threshold-item { color: #e1e7ed; }
+        .matrix-list .threshold-item strong { color: var(--alert-red); }
+
+        .matrix-list svg {
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        /* --- Premium Segment Comparison Matrix Table --- */
+        .table-scroll-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 4rem;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--surface-color);
+        }
+
+        .comparison-matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+            min-width: 650px;
+        }
+
+        .comparison-matrix-table th, .comparison-matrix-table td {
+            padding: 1.1rem 1.3rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-matrix-table th {
+            background: #15171f;
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .comparison-matrix-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .metric-label-column {
+            font-weight: 600;
+            color: var(--text-muted);
+            background: rgba(255,255,255,0.01);
+        }
+
+        .primary-highlight-cell {
+            color: var(--accent-glow);
+            font-weight: 600;
+        }
+
+        /* --- Technical Blueprint Data Specifications List --- */
+        .specs-grid {
+            border-top: 1px solid var(--border-color);
+            margin-bottom: 4rem;
+        }
+
+        .spec-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+        }
+
+        .spec-label {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .spec-value {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* Footer Layer */
+        footer {
+            text-align: center;
+            padding: 3rem 4% 0 4%;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 6rem;
+        }
+
+        /* --- Media Breakpoints --- */
+        @media (max-width: 850px) {
+            .showcase-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .pro-con-matrix { grid-template-columns: 1fr; gap: 1.5rem; }
+            header { padding: 1.2rem 4%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand-logo"><a href="index.html">LINK<span>ORE</span></a></div>
+        <nav>
+            <a href="blog.html" class="active">Blog</a>
+            <a href="studio.html">Custom Studio</a>
+            <a href="contact.html" class="btn-contact">Contact Us</a>
+        </nav>
+    </header>
+
+    <main class="article-wrapper">
+        
+        <!-- Premium Article Identity -->
+        <section class="article-header">
+            <h1>The Blueprint Report: Architectural Analysis of the NYRWANA Premium Cordless Ambient Cell</h1>
+            <div class="article-meta-data">
+                <span>Published: <strong>July 2026</strong></span>
+                <span>Category: <strong>Interior Hardware & Ambient Tech</strong></span>
+                <span>Author: <strong>Linkore Technical Lab</strong></span>
+            </div>
+        </section>
+
+        <!-- Top Overview & Purchase Framework Showcase Block -->
+        <section class="showcase-grid">
+            
+            <!-- Dynamic Image Interface Module -->
+            <div class="image-showcase-container">
+                <div class="main-display-frame">
+                    <img id="mainShowcaseTarget" src="images/5.jpg" alt="NYRWANA Metallic Gold Core Architecture Display">
+                </div>
+                <div class="thumbnail-strip">
+                    <div class="thumbnail-item active" onclick="updateShowcaseTarget(this, 'images/5.jpg')">
+                        <img src="images/5.jpg" alt="View 5 Grid Frame">
+                    </div>
+                    <div class="thumbnail-item" onclick="updateShowcaseTarget(this, 'images/6.jpg')">
+                        <img src="images/6.jpg" alt="View 6 Interior Context">
+                    </div>
+                    <div class="thumbnail-item" onclick="updateShowcaseTarget(this, 'images/7.jpg')">
+                        <img src="images/7.jpg" alt="View 7 Interface Mechanics">
+                    </div>
+                    <div class="thumbnail-item" onclick="updateShowcaseTarget(this, 'images/8.jpg')">
+                        <img src="images/8.jpg" alt="View 8 Scale Blueprint">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Highly Trustworthy Purchase Conversion Card Structure -->
+            <div class="lab-verdict-card">
+                <div class="verdict-header-badge">
+                    <span>Linkore Lab Verdict &bull; 8.7 / 10</span>
+                    <span>Premium Pick</span>
+                </div>
+                <h2 class="verdict-product-title">NYRWANA Cordless Gold Table Lamp</h2>
+                <p class="verdict-product-subtitle">Engineered for architectural lifestyle spaces, featuring a 2000mAh structural battery cell and high-temperature glossy baking finishes.</p>
+                
+                <div class="price-evaluation-block">
+                    <span class="price-label">Optimal Live Offer Tier</span>
+                    <div class="price-flex">
+                        <span class="live-price-tag">Check Best Price</span>
+                        <a href="https://link.amazon/B08BmQScl" target="_blank" class="live-price-link">Merchant Hub &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Highly Trustworthy Checkout Framework Component Button -->
+                <button class="secure-checkout-btn" onclick="window.open('https://link.amazon/B08BmQScl', '_blank')">
+                    Secure Checkout At Amazon
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M14 1a1 1 0 0 1 1 1 v12a1 1 0 0 1-1 1 H2a1 1 0 0 1-1-1 V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2 V2a2 2 0 0 0-2-2 H2z"/>
+                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                    </svg>
+                </button>
+
+                <div class="security-guarantee-note">
+                    <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 1a2 2 0 0 1 2 2v2H6V3a2 2 0 0 1 2-2zm3 4V3a3 3 0 0 0-6 0v2H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-3z"/>
+                    </svg>
+                    Verified Official Secure Tracking Link Included
+                </div>
+            </div>
+        </section>
+
+        <!-- Structural Integration Analysis Text -->
+        <section>
+            <h2 class="section-title">Structural Integration Analysis</h2>
+            <p class="section-paragraph">
+                The NYRWANA Cordless Metallic Table Lamp transitions fluidly into modern luxury layout frameworks, delivering standalone architectural value where complex power cord integration is omitted. At its core, the lamp chassis relies on a solid metal layout treated with high-temperature glossy baking processes, striking an optimal balance between lightweight portability (400 grams) and resilient long-lasting color preservation against early micro-corrosion factors.
+            </p>
+            <p class="section-paragraph">
+                Equipped with custom continuous internal lithium storage cell setups, the built-in 2000mAh safe power unit runs efficiently without traditional electrical socket positioning restrictions. It manages structural power dispersion accurately across its 3-color light profile, outputting stable, flicker-free illumination for roughly 15 to 20 continuous running hours per optimal charging cycle. To provide high-end handling characteristics, a responsive top-mounted capacitive touch zone allows users to control color temperature switches via quick taps, or handle smooth linear stepless dimming via sustained physical holds.
+            </p>
+        </section>
+
+        <!-- Side-by-Side Architectural Advantages vs Structural Thresholds Matrix -->
+        <section class="pro-con-matrix">
+            <div class="matrix-column advantages-layer">
+                <div class="matrix-header">
+                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16" style="color: var(--accent-glow);">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.014-1.05z"/>
+                    </svg>
+                    Engineering Advantages
+                </div>
+                <ul class="matrix-list">
+                    <li class="advantage-item">
+                        <strong>True Wireless Freedom:</strong> Integrated 2000mAh battery unit layout cancels structural cord dependencies across bedrooms, living layouts, or travel applications.
+                    </li>
+                    <li class="advantage-item">
+                        <strong>Premium Baked Alloy Frame:</strong> Real metal base structure treated with protective high-gloss baking coats to retain premium look.
+                    </li>
+                    <li class="advantage-item">
+                        <strong>Responsive Tactile Logic:</strong> Precision capacitive touch module switches color modes effortlessly and supports fine linear stepless brightness adjustments.
+                    </li>
+                    <li class="advantage-item">
+                        <strong>Highly Adaptable Tone Engine:</strong> Offers 3 distinct color temperatures alongside comfortable warm lighting variations suited for evening relaxation.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="matrix-column thresholds-layer">
+                <div class="matrix-header">
+                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16" style="color: var(--alert-red);">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                    </svg>
+                    Structural Thresholds
+                </div>
+                <ul class="matrix-list">
+                    <li class="threshold-item">
+                        <strong>Atmospheric Lux Limits:</strong> Tailored purely for moody lifestyle aesthetics and cozy accent lighting; not designed to illuminate large workspaces.
+                    </li>
+                    <li class="threshold-item">
+                        <strong>Cycle Maintenance:</strong> Mixed user metrics imply strict reliance on clean USB-C charging pipelines to keep the 15-20 hour runtime baseline stable.
+                    </li>
+                    <li class="threshold-item">
+                        <strong>Glossy Surface Care:</strong> The high-end reflective gold exterior requires occasional wiping to stay free of smudges and fingerprint patterns.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Segment Benchmark Comparison Matrix Table Section -->
+        <section>
+            <h2 class="section-title">Segment Benchmark Comparison Matrix</h2>
+            <div class="table-scroll-container">
+                <table class="comparison-matrix-table">
+                    <thead>
+                        <tr>
+                            <th>Performance Metric</th>
+                            <th>NYRWANA Core Unit</th>
+                            <th>Segment Entry Standard</th>
+                            <th>Premium Alternate Layer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="metric-label-column">Chassis Material</td>
+                            <td class="primary-highlight-cell">Glossy Baked Metal Alloy</td>
+                            <td>Polycarbonate Composite</td>
+                            <td>Stamped Thin Iron Sheet</td>
+                        </tr>
+                        <tr>
+                            <td class="metric-label-column">Storage Cell Array</td>
+                            <td class="primary-highlight-cell">2000mAh High-Density</td>
+                            <td>1200mAh Standard Cylinder</td>
+                            <td>1500mAh Basic Battery Set</td>
+                        </tr>
+                        <tr>
+                            <td class="metric-label-column">Interface Logic</td>
+                            <td class="primary-highlight-cell">Capacitive Touch Switch</td>
+                            <td>Mechanical Cord Toggle</td>
+                            <td>Basic Underside Push Button</td>
+                        </tr>
+                        <tr>
+                            <td class="metric-label-column">Dimming Matrix</td>
+                            <td class="primary-highlight-cell">Linear Stepless Hold Dimming</td>
+                            <td>Fixed Dual-Stage Steps</td>
+                            <td>Fixed 3-Level Output Only</td>
+                        </tr>
+                        <tr>
+                            <td class="metric-label-column">Charging Core</td>
+                            <td class="primary-highlight-cell">USB-C Fast Architecture</td>
+                            <td>Legacy Micro-USB Port</td>
+                            <td>Standard Micro-USB Hub</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Hardware Blueprint Data Specifications Section Table -->
+        <section>
+            <h2 class="section-title">Hardware Blueprint Data Specifications</h2>
+            <div class="specs-grid">
+                <div class="spec-row">
+                    <div class="spec-label">Finish Architecture</div>
+                    <div class="spec-value">High-Gloss Premium Protective Baking Coat</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-label">Structural Base Material</div>
+                    <div class="spec-value">Machined Heavy-Duty Base Metal</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-label">Volumetric Dimensions</div>
+                    <div class="spec-value">12.0D x 12.0W x 20.0H Centimeters</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-label">Mass Metrics</div>
+                    <div class="spec-value">400 Grams (Balanced Ergonomic Profile)</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-label">Shade Framework Material</div>
+                    <div class="spec-value">Solid Metal Diffusion Hood</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-label">Color Matrix Designation</div>
+                    <div class="spec-value">Refined New Gold Lamp Spectrum YA14</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 LINKORE Structural Review Ecosystem Division. Built on Secure Verified Frameworks.</p>
+    </footer>
+
+    <script>
+        // Interactive Multi-View Array Interface Script
+        function updateShowcaseTarget(element, imageSourcePath) {
+            // Target core element item
+            document.getElementById('mainShowcaseTarget').src = imageSourcePath;
+            
+            // Reconfigure active layout visual indicator outlines
+            const structuralThumbnails = document.querySelectorAll('.thumbnail-item');
+            structuralThumbnails.forEach(item => item.classList.remove('active'));
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
