@@ -670,7 +670,136 @@
         </div>
     </a>
 </article>
-               ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+<article style="display: flex; flex-direction: column;">
+    <style>
+        .grid-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            height: 100%;
+        }
+
+        .blog-card {
+            background-color: #111823;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+            width: 100%;
+            max-width: 480px; /* Aligns with your grid block styling */
+        }
+
+        .blog-card:hover {
+            background-color: #052e16; /* Premium deep green hover state */
+            border-color: #00e676;      /* Accent green boundary highlight */
+        }
+
+        .card-image-area {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background-color: #0a0e14;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover .card-img {
+            transform: scale(1.02);
+        }
+
+        .badge-premium {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: rgba(5, 46, 22, 0.85);
+            border: 1px solid #00e676;
+            color: #00e676;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+        }
+
+        .card-body {
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-timeline {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.3px;
+        }
+
+        .card-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            line-height: 1.35;
+            color: #e2e8f0;
+            margin: 0 0 0.85rem 0;
+        }
+
+        .card-snippet {
+            font-size: 0.92rem;
+            color: #94a3b8;
+            line-height: 1.55;
+            margin: 0 0 1.5rem 0;
+            flex-grow: 1;
+        }
+
+        .blog-card:hover .card-snippet {
+            color: #cbd5e1;
+        }
+
+        .card-action-trigger {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #00f2fe; /* Base cyan action text */
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.3s ease;
+        }
+
+        .blog-card:hover .card-action-trigger {
+            color: #00e676; /* Shifts to theme green on card hover */
+        }
+    </style>
+
+    <a href="blog_8.html" class="grid-card-link">
+        <div class="blog-card">
+            <div class="card-image-area">
+                <span class="badge-premium">Premium Pick</span>
+                <img class="card-img" src="images/t8.png" alt="2-in-1 Mini Steamer & Iron Lab Architecture">
+            </div>
+            <div class="card-body">
+                <div class="card-timeline">July 2026 • 5 min read</div>
+                <h3 class="card-title">The Blueprint Report: Inside the 2-in-1 Portable Travel Friendly Steamer Matrix</h3>
+                <p class="card-snippet">
+                    Can a lightweight travel companion truly deliver leak-free vertical steaming and crisp horizontal iron profiles without damage? Our laboratory evaluation tests this dual-purpose rapid heat core on delicate silks and heavy fabrics...
+                </p>
+                <div class="card-action-trigger">
+                    Read Full Laboratory Assessment →
+                </div>
+            </div>
+        </div>
+    </a>
+</article>
+            /////////////////////////////////
         </section>
     </main>
 
