@@ -551,125 +551,40 @@
         </div>
     </a>
 </article>
-<article style="grid-column: 2; margin-top: 2rem;">
-    <style>
-        .promo-block {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 1.5rem;
-            background-color: #111823;
-            border: 1px solid #1e293b;
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-decoration: none;
-            color: inherit;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
-            height: 100%;
-            box-sizing: border-box;
-        }
+<article style="background: #11141a; border-radius: 12px; padding: 24px; box-sizing: border-box; font-family: sans-serif; transition: border-color 0.3s ease, transform 0.3s ease; border: 2px solid transparent; cursor: pointer; max-width: 480px; position: relative;" 
+         onmouseover="this.style.borderColor='#00e699';" 
+         onmouseout="this.style.borderColor='transparent';"
+         onclick="window.location.href='blog_8.html';">
+         
+    <div style="display: inline-block; background-color: rgba(0, 230, 153, 0.15); color: #00e699; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 6px 12px; border-radius: 4px; letter-spacing: 1px; margin-bottom: 16px;">
+        Premium Pick
+    </div>
 
-        @media (max-width: 768px) {
-            .promo-block {
-                grid-template-columns: 1fr;
-                gap: 1.25rem;
-                padding: 1.25rem;
-            }
-        }
+    <div style="width: 100%; border-radius: 8px; overflow: hidden; margin-bottom: 20px; aspect-ratio: 16 / 10;">
+        <img src="images/t8.png" alt="Dual-Action Garment Steamer & Iron" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+    </div>
 
-        .promo-block:hover {
-            background-color: #052e16; /* Deep architectural green background on hover */
-            border-color: #00e676;      /* Accent green boundary highlight */
-        }
+    <div style="color: #6c7a89; font-size: 13px; font-weight: 500; margin-bottom: 12px; display: flex; gap: 8px; align-items: center;">
+        <span>July 2026</span>
+        <span>•</span>
+        <span>4 min read</span>
+    </div>
 
-        .promo-image-wrapper {
-            width: 100%;
-            aspect-ratio: 1; /* Keeps image square/compact to look clean alongside standard cards */
-            overflow: hidden;
-            border-radius: 8px;
-            border: 1px solid #1e293b;
-            background-color: #0a0e14;
-        }
+    <h2 style="color: #ffffff; font-size: 24px; font-weight: 700; line-height: 1.3; margin: 0 0 14px 0;">
+        The Blueprint Report: Inside the Advanced Dual-Action Handheld Garment Ecosystem
+    </h2>
 
-        .promo-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
+    <p style="color: #9aa5b1; font-size: 14px; line-height: 1.6; margin: 0 0 20px 0; font-weight: 400;">
+        Can a travel-ready architectural chassis engineer crisp, wrinkle-free garments instantly? Our laboratory analysis dissects this rapid-heating, multi-angle system—validating zero-leak vertical deployment and comprehensive structural fabric protection across delicate silks and structural wools...
+    </p>
 
-        .promo-block:hover .promo-image {
-            transform: scale(1.02);
-        }
+    <div style="display: inline-flex; align-items: center; color: #00e699; font-size: 14px; font-weight: 600; text-decoration: none; transition: color 0.2s ease;">
+        <span style="border-bottom: 1px solid transparent;" onmouseover="this.style.borderBottom='1px solid #00e699'" onmouseout="this.style.borderBottom='1px solid transparent'">
+            Read Full Laboratory Assessment
+        </span>
+        <span style="margin-left: 6px; font-size: 16px; transform: translateY(-1px);">→</span>
+    </div>
 
-        .promo-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .promo-tag {
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            color: #00f2fe;
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-        }
-
-        .promo-block:hover .promo-tag {
-            color: #00e676;
-        }
-
-        .promo-heading {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin: 0 0 0.5rem 0;
-            color: #e2e8f0;
-            line-height: 1.35;
-        }
-
-        .promo-text {
-            font-size: 0.88rem;
-            color: #94a3b8;
-            margin: 0 0 1rem 0;
-            line-height: 1.5;
-        }
-
-        .promo-block:hover .promo-text {
-            color: #cbd5e1;
-        }
-
-        .promo-link-action {
-            font-size: 0.82rem;
-            font-weight: 700;
-            color: #00f2fe;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            letter-spacing: 0.3px;
-        }
-
-        .promo-block:hover .promo-link-action {
-            color: #00e676;
-        }
-    </style>
-
-    <a href="blog_8.html" class="promo-block">
-        <div class="promo-image-wrapper">
-            <img class="promo-image" src="images/t8.png" alt="2-in-1 Mini Steamer & Iron Lab Blueprint Analysis">
-        </div>
-        <div class="promo-content">
-            <div class="promo-tag">Hardware Architecture Matrix</div>
-            <h3 class="promo-heading">Deep Dive: Inside the 2-in-1 Portable Travel Steamer Configuration</h3>
-            <p class="promo-text">
-                Explore our full structural verification report detailing how this compact thermal unit maintains stable, continuous pressure metrics while operating on delicate synthetic and blended matrix networks.
-            </p>
-            <div class="promo-link-action">
-                Access Full Blueprint Data Report →
-            </div>
-        </div>
-    </a>
 </article>
         </section>
     </main>
